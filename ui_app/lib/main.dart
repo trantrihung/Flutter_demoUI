@@ -13,17 +13,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: colorCustom,
-        // primaryColor: Colors.red,
-        brightness: Brightness.light,
-        fontFamily: GoogleFonts.poppins().fontFamily,
-        scaffoldBackgroundColor: Color(0xFFFFFFFF),
-      ),
-      home: const FoodyApp(),
+    return const MaterialApp(
+      home: FoodyApp(),
     );
   }
 }

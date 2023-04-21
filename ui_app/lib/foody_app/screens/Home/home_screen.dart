@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
+import '../../features/ProductCard/product_card.dart';
 import '../../utils/theme.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,13 +13,25 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List menu = [
+    {"image": "assets/images/foody/icon_hamburger.png", "title": "hamburger"},
+    {"image": "assets/images/foody/icon_drink.png", "title": "drink"},
+    {"image": "assets/images/foody/icon_dessert.png", "title": "dessert"},
+    {"image": "assets/images/foody/icon_meat.png", "title": "meat"},
+    {"image": "assets/images/foody/icon_pizza.png", "title": "pizza"},
+    {"image": "assets/images/foody/icon_ramen.png", "title": "ramen"},
+    {"image": "assets/images/foody/icon_vegeta.png", "title": "vegeta"},
+    {"image": "assets/images/foody/icon_more.png", "title": "more"},
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 24),
         child: ListView(
-          shrinkWrap: true,
+          clipBehavior: Clip.none,
+          // shrinkWrap: true,
           children: [
             const SizedBox(height: 34),
             Row(
@@ -50,29 +63,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     )
                   ],
                 ),
-                // Container(
-                //   width: 48,
-                //   height: 48,
-                //   decoration: BoxDecoration(),
-                //   child: Icon(Icons.notifications),
-                // ),
-                // SizedBox(
-                //   width: 60,
-                //   height: 60,
-                //   child: OutlinedButton(
-                //     onPressed: () {},
-                //     style: OutlinedButton.styleFrom(
-                //       shape: CircleBorder(),
-                //       // borderSide: BorderSide(color: Colors.green),
-                //     ),
-                //     child: const Icon(
-                //       Icons.notifications_active_outlined,
-                //       color: Colors.black,
-                //       size: 32,
-                //     ),
-                //   ),
-                // ),
-
                 Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -100,7 +90,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: IconButton(
                             onPressed: () {},
                             splashRadius: 25,
-                            // splashColor: Theme.of(context).primaryColor,
                             icon: Icon(Icons.shopify_outlined)),
                       ),
                     ],
@@ -114,11 +103,11 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 56,
               child: TextFormField(
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
                 decoration: InputDecoration(
                     // contentPadding: EdgeInsets.symmetric(vertical: 20),
                     hintText: "What are you craving?",
-                    hintStyle: TextStyle(fontSize: 14),
+                    hintStyle: const TextStyle(fontSize: 14),
                     border: OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(20),
@@ -135,6 +124,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(height: 26),
+
+            // Special Offers
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -159,49 +150,132 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const SizedBox(height: 26),
             Container(
-                height: 180,
-                decoration: BoxDecoration(
-                  color: kColorPrimary,
-                  borderRadius: BorderRadius.circular(20),
-                  image: const DecorationImage(
-                    alignment: Alignment.topRight,
-                    image: AssetImage("assets/images/foody/burger.png"),
-                  ),
+              height: 180,
+              decoration: BoxDecoration(
+                color: kColorPrimary,
+                borderRadius: BorderRadius.circular(20),
+                image: const DecorationImage(
+                  alignment: Alignment.topRight,
+                  image: AssetImage("assets/images/foody/burger.png"),
                 ),
-                child: Row(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 30),
-                      width: MediaQuery.of(context).size.width / 3,
-                      child: RichText(
-                        softWrap: true,
-                        text: const TextSpan(
-                          children: [
-                            TextSpan(
-                              text: "30% ",
-                              style: TextStyle(
-                                fontSize: 70,
-                                fontWeight: FontWeight.bold,
-                              ),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 30),
+                    width: MediaQuery.of(context).size.width / 3,
+                    child: RichText(
+                      softWrap: true,
+                      text: const TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "30% ",
+                            style: TextStyle(
+                              fontSize: 60,
+                              fontWeight: FontWeight.bold,
                             ),
-                            TextSpan(
-                              text: "Discount only ",
-                              style: TextStyle(
-                                fontSize: 20,
-                              ),
+                          ),
+                          TextSpan(
+                            text: "Discount only ",
+                            style: TextStyle(
+                              fontSize: 20,
                             ),
-                            TextSpan(
-                              text: "valid for today!",
-                              style: TextStyle(
-                                fontSize: 20,
-                              ),
+                          ),
+                          TextSpan(
+                            text: "valid for today!",
+                            style: TextStyle(
+                              fontSize: 20,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 26),
+
+            // icon special offers
+            GridView.count(
+              shrinkWrap: true,
+              mainAxisSpacing: 20,
+              crossAxisSpacing: 20,
+              crossAxisCount: 4,
+              children: menu.map((item) {
+                return Column(
+                  children: [
+                    IconButton(
+                      iconSize: 46,
+                      onPressed: () {},
+                      icon: Image.asset(
+                        item["image"].toString(),
+                      ),
+                    ),
+                    Text(
+                      item["title"].toString(),
+                      style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          overflow: TextOverflow.ellipsis),
+                    )
                   ],
-                )),
+                );
+              }).toList(),
+            ),
+            const SizedBox(height: 26),
+
+            // Text Discount Guaranteed
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Discount Guaranteed! 👌",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.7,
+                  ),
+                ),
+                Text(
+                  "See All",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).primaryColor,
+                    letterSpacing: 0.7,
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 26),
+            // Card
+            const ProductCard(),
+
+            const SizedBox(height: 26),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Discount Guaranteed! 👌",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.7,
+                  ),
+                ),
+                Text(
+                  "See All",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).primaryColor,
+                    letterSpacing: 0.7,
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
