@@ -1,8 +1,8 @@
+import 'package:autoscale_tabbarview/autoscale_tabbarview.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:ui_app/foody_app/widgets/button.dart';
 
-import '../../features/ProductCard/product_card.dart';
+import '../../features/product/product_card.dart';
 import '../../utils/theme.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,7 +12,7 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   List menu = [
     {"image": "assets/images/foody/icon_hamburger.png", "title": "hamburger"},
     {"image": "assets/images/foody/icon_drink.png", "title": "drink"},
@@ -23,12 +23,16 @@ class _HomeScreenState extends State<HomeScreen> {
     {"image": "assets/images/foody/icon_vegeta.png", "title": "vegeta"},
     {"image": "assets/images/foody/icon_more.png", "title": "more"},
   ];
+  int _selectedTabbar = 0;
 
   @override
   Widget build(BuildContext context) {
+    TabController _tabController =
+        TabController(length: menu.length, vsync: this);
     return Scaffold(
       body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 24),
+        // margin: const EdgeInsets.symmetric(horizontal: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 24),
         child: ListView(
           clipBehavior: Clip.none,
           // shrinkWrap: true,
@@ -197,32 +201,64 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 26),
 
             // icon special offers
-            GridView.count(
-              shrinkWrap: true,
-              mainAxisSpacing: 20,
-              crossAxisSpacing: 20,
-              crossAxisCount: 4,
-              children: menu.map((item) {
-                return Column(
-                  children: [
-                    IconButton(
-                      iconSize: 46,
-                      onPressed: () {},
-                      icon: Image.asset(
-                        item["image"].toString(),
-                      ),
+            SizedBox(
+              width: double.infinity,
+              child: Wrap(
+                alignment: WrapAlignment.spaceEvenly,
+                spacing: 20,
+                runSpacing: 20,
+                children: menu.map((item) {
+                  return SizedBox(
+                    width: 80,
+                    child: Column(
+                      children: [
+                        IconButton(
+                          iconSize: 46,
+                          onPressed: () {},
+                          icon: Image.asset(
+                            item["image"].toString(),
+                          ),
+                        ),
+                        Text(
+                          item["title"].toString(),
+                          style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              overflow: TextOverflow.ellipsis),
+                        )
+                      ],
                     ),
-                    Text(
-                      item["title"].toString(),
-                      style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          overflow: TextOverflow.ellipsis),
-                    )
-                  ],
-                );
-              }).toList(),
+                  );
+                }).toList(),
+              ),
             ),
+            // GridView.count(
+            //   clipBehavior: Clip.none,
+            //   shrinkWrap: true,
+            //   mainAxisSpacing: 20,
+            //   crossAxisSpacing: 20,
+            //   crossAxisCount: 4,
+            //   children: menu.map((item) {
+            //     return Column(
+            //       children: [
+            //         IconButton(
+            //           iconSize: 46,
+            //           onPressed: () {},
+            //           icon: Image.asset(
+            //             item["image"].toString(),
+            //           ),
+            //         ),
+            //         Text(
+            //           item["title"].toString(),
+            //           style: const TextStyle(
+            //               fontSize: 18,
+            //               fontWeight: FontWeight.w600,
+            //               overflow: TextOverflow.ellipsis),
+            //         )
+            //       ],
+            //     );
+            //   }).toList(),
+            // ),
             const SizedBox(height: 26),
 
             // Text Discount Guaranteed
@@ -258,7 +294,7 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  "Discount Guaranteed! 👌",
+                  "Recommended For You 😍",
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -274,6 +310,56 @@ class _HomeScreenState extends State<HomeScreen> {
                     letterSpacing: 0.7,
                   ),
                 ),
+              ],
+            ),
+            const SizedBox(height: 26),
+
+            TabBar(
+              controller: _tabController,
+              indicator: BoxDecoration(
+                color: kColorPrimary,
+                borderRadius: BorderRadius.circular(30),
+              ),
+              labelColor: Colors.white,
+              unselectedLabelColor: kColorPrimary,
+              isScrollable: true,
+              splashBorderRadius: BorderRadius.circular(30),
+              tabs: menu
+                  .map(
+                    (item) => Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        border: Border.all(
+                          width: 1,
+                          color: kColorPrimary,
+                        ),
+                      ),
+                      child: Tab(
+                        child: Row(
+                          children: [
+                            Image.asset(item["image"], width: 20, height: 20),
+                            const SizedBox(width: 8),
+                            Text(item["title"]),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+            // const SizedBox(height: 26),
+            AutoScaleTabBarView(
+              controller: _tabController,
+              children: const [
+                ProductCard(isCardHorizontal: true),
+                ProductCard(isCardHorizontal: true),
+                ProductCard(isCardHorizontal: true),
+                ProductCard(isCardHorizontal: true),
+                ProductCard(isCardHorizontal: true),
+                ProductCard(isCardHorizontal: true),
+                ProductCard(isCardHorizontal: true),
+                ProductCard(isCardHorizontal: true),
               ],
             ),
           ],

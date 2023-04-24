@@ -5,6 +5,7 @@ const kColorGrey = Color(0xFFe2e2e2);
 var kColorGreyTitle = Colors.grey[600];
 const kBackgroundTextFormField = Color(0xFFf5f5f6);
 const double kHeading1 = 38;
+const double kPaddingPrimary = 24;
 // const kColorSecondary = Col;
 Map<int, Color> color = const {
   50: Color.fromRGBO(136, 14, 79, .1),
