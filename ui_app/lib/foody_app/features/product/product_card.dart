@@ -5,11 +5,11 @@ import '../../utils/theme.dart';
 class ProductCard extends StatelessWidget {
   const ProductCard({
     this.isCardHorizontal,
-    this.length,
+    required this.length,
     Key? key,
   }) : super(key: key);
   final bool? isCardHorizontal;
-  final int? length;
+  final int length;
 
   @override
   Widget build(BuildContext context) {

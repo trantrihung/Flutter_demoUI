@@ -3,26 +3,32 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:ui_app/foody_app/features/product/product_card.dart';
 
-class MyCart extends StatelessWidget {
-  const MyCart({super.key});
+class SearchCategory extends StatelessWidget {
+  const SearchCategory({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(),
+        leading: const BackButton(),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text("My Cart"),
+        title: const Text(
+          "Hamburger",
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
-      body: ListView(
-        scrollDirection: Axis.vertical,
-        children: const [
-          ProductCard(
+      body: ListView.builder(
+        itemCount: 3,
+        itemBuilder: (_, index) {
+          return ProductCard(
             isCardHorizontal: true,
             length: 3,
-          ),
-        ],
+          );
+        },
       ),
     );
   }

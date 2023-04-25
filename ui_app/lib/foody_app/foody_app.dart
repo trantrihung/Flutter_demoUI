@@ -4,8 +4,10 @@ import 'package:ui_app/foody_app/screens/Auth/signin_phonenumber_screen.dart';
 import 'package:ui_app/foody_app/screens/Auth/signup_screen.dart';
 import 'package:ui_app/foody_app/screens/Auth/verify_otp.dart';
 import 'package:ui_app/foody_app/screens/Home/home_screen.dart';
+import 'package:ui_app/foody_app/screens/MoreCategory/more_category.dart';
 import 'package:ui_app/foody_app/screens/MyCart/my_cart.dart';
 import 'package:ui_app/foody_app/screens/Profiles/profiles_screen.dart';
+import 'package:ui_app/foody_app/screens/Search/search_category.dart';
 import 'package:ui_app/foody_app/screens/SpecialOffers/special_offers.dart';
 import 'package:ui_app/foody_app/screens/Wellcome/letyouin_screen.dart';
 import 'package:ui_app/foody_app/screens/Wellcome/splash_screen.dart';
@@ -30,7 +32,7 @@ class FoodyApp extends StatelessWidget {
         fontFamily: GoogleFonts.poppins().fontFamily,
         scaffoldBackgroundColor: Color(0xFFFFFFFF),
       ),
-      home: const HomeScreen(),
+      home: const SearchCategory(),
     );
   }
 }
