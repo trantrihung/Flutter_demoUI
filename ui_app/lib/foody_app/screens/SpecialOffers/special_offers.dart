@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:ui_app/foody_app/utils/theme.dart';
+import 'package:ui_app/foody_app/utils/styles.dart';
 import 'package:ui_app/foody_app/widgets/specialoffices_widget.dart';
 
 class SpecialOffices extends StatelessWidget {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ui_app/foody_app/models/menucategory_model.dart';
+import 'package:ui_app/foody_app/utils/styles.dart';
 
 class IconCategory extends StatelessWidget {
   const IconCategory({super.key});
@@ -14,11 +15,11 @@ class IconCategory extends StatelessWidget {
         runSpacing: 20,
         children: menus.map((item) {
           return SizedBox(
-            width: 80,
+            width: 60,
             child: Column(
               children: [
                 IconButton(
-                  iconSize: 46,
+                  iconSize: 38,
                   onPressed: () {},
                   icon: Image.asset(
                     item.image.toString(),
@@ -26,10 +27,7 @@ class IconCategory extends StatelessWidget {
                 ),
                 Text(
                   item.title.toString(),
-                  style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      overflow: TextOverflow.ellipsis),
+                  style: heading3.copyWith(overflow: TextOverflow.ellipsis),
                 )
               ],
             ),

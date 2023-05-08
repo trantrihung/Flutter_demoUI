@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/theme.dart';
+import '../../utils/styles.dart';
 import '../../widgets/button.dart';
 
 class Profile extends StatelessWidget {

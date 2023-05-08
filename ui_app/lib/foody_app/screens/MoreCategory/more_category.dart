@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ui_app/foody_app/utils/theme.dart';
+import 'package:ui_app/foody_app/utils/styles.dart';
 import 'package:ui_app/foody_app/widgets/icon_category.dart';
 
 import '../../models/menucategory_model.dart';

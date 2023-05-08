@@ -1,11 +1,16 @@
 import 'package:autoscale_tabbarview/autoscale_tabbarview.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:ui_app/foody_app/models/menucategory_model.dart';
 import 'package:ui_app/foody_app/widgets/button.dart';
 import 'package:ui_app/foody_app/widgets/icon_category.dart';
+import 'package:ui_app/foody_app/widgets/specialoffices_widget.dart';
 
-import '../../features/product/product_card.dart';
-import '../../utils/theme.dart';
+import '../../widgets/heading.dart';
+import '../../widgets/label_section.dart';
+import '../../widgets/product_card.dart';
+import '../../utils/styles.dart';
+import '../../widgets/search.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,13 +20,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  int _selectedTabbar = 0;
-
   @override
   Widget build(BuildContext context) {
     TabController _tabController =
         TabController(length: menus.length, vsync: this);
     return Scaffold(
+      backgroundColor: background,
       body: Container(
         // margin: const EdgeInsets.symmetric(horizontal: 24),
         padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -29,263 +33,47 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           clipBehavior: Clip.none,
           // shrinkWrap: true,
           children: [
-            const SizedBox(height: 34),
-            Row(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(50)),
-                  child: Image.asset(
-                    "assets/images/foody/avatar.png",
-                    height: 48,
-                    width: 48,
-                  ),
-                ),
-                SizedBox(width: 16),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Deliver to",
-                      style: TextStyle(fontSize: 14, color: kColorGreyTitle),
-                    ),
-                    Text(
-                      "Time Square",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 1,
-                      ),
-                    )
-                  ],
-                ),
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Container(
-                        height: 48,
-                        width: 48,
-                        decoration: BoxDecoration(
-                          border: Border.all(width: 1, color: kColorGrey),
-                          shape: BoxShape.circle,
-                        ),
-                        child: IconButton(
-                            onPressed: () {},
-                            splashRadius: 25,
-                            icon: Icon(Icons.notifications_active_outlined)),
-                      ),
-                      SizedBox(width: 16),
-                      Container(
-                        height: 48,
-                        width: 48,
-                        decoration: BoxDecoration(
-                          border: Border.all(width: 1, color: kColorGrey),
-                          shape: BoxShape.circle,
-                        ),
-                        child: IconButton(
-                            onPressed: () {},
-                            splashRadius: 25,
-                            icon: Icon(Icons.shopify_outlined)),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-            const SizedBox(height: 26),
-
+            SizedBox(height: medium),
+            const HeadingSection(),
+            SizedBox(height: medium),
             //Search form
-            SizedBox(
-              height: 56,
-              child: TextFormField(
-                style: const TextStyle(fontSize: 18),
-                decoration: InputDecoration(
-                    // contentPadding: EdgeInsets.symmetric(vertical: 20),
-                    hintText: "What are you craving?",
-                    hintStyle: const TextStyle(fontSize: 14),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    filled: true,
-                    fillColor: kBackgroundTextFormField,
-                    prefixIcon: const Padding(
-                      padding: EdgeInsetsDirectional.only(start: 30, end: 10),
-                      child: Icon(
-                        Icons.search,
-                        // size: 32,
-                      ),
-                    )),
-              ),
-            ),
-            const SizedBox(height: 26),
+            const SearchSection(),
+            SizedBox(height: medium),
 
             // Special Offers
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  "Special Offers",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 0.7,
-                  ),
-                ),
-                Text(
-                  "See All",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).primaryColor,
-                    letterSpacing: 0.7,
-                  ),
-                ),
-              ],
+            LabelSection(
+              text: "Special Offers",
+              style: heading1,
             ),
-            const SizedBox(height: 26),
-            Container(
-              height: 180,
-              decoration: BoxDecoration(
-                color: kColorPrimary,
-                borderRadius: BorderRadius.circular(20),
-                image: const DecorationImage(
-                  alignment: Alignment.topRight,
-                  image: AssetImage("assets/images/foody/burger.png"),
-                ),
-              ),
-              child: Row(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 30),
-                    width: MediaQuery.of(context).size.width / 3,
-                    child: RichText(
-                      softWrap: true,
-                      text: const TextSpan(
-                        children: [
-                          TextSpan(
-                            text: "30% ",
-                            style: TextStyle(
-                              fontSize: 60,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          TextSpan(
-                            text: "Discount only ",
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                          TextSpan(
-                            text: "valid for today!",
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 26),
+            SizedBox(height: medium),
+            const SpecialWidget(),
 
             // icon special offers
+            SizedBox(height: medium),
             const IconCategory(),
-            // GridView.count(
-            //   clipBehavior: Clip.none,
-            //   shrinkWrap: true,
-            //   mainAxisSpacing: 20,
-            //   crossAxisSpacing: 20,
-            //   crossAxisCount: 4,
-            //   children: menu.map((item) {
-            //     return Column(
-            //       children: [
-            //         IconButton(
-            //           iconSize: 46,
-            //           onPressed: () {},
-            //           icon: Image.asset(
-            //             item["image"].toString(),
-            //           ),
-            //         ),
-            //         Text(
-            //           item["title"].toString(),
-            //           style: const TextStyle(
-            //               fontSize: 18,
-            //               fontWeight: FontWeight.w600,
-            //               overflow: TextOverflow.ellipsis),
-            //         )
-            //       ],
-            //     );
-            //   }).toList(),
-            // ),
-            const SizedBox(height: 26),
 
             // Text Discount Guaranteed
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  "Discount Guaranteed! 👌",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 0.7,
-                  ),
-                ),
-                Text(
-                  "See All",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).primaryColor,
-                    letterSpacing: 0.7,
-                  ),
-                ),
-              ],
-            ),
+            SizedBox(height: medium),
+            LabelSection(text: "Discount Guaranteed! 👌", style: heading1),
 
-            const SizedBox(height: 26),
             // Card
+            SizedBox(height: medium),
             const ProductCard(
               length: 3,
             ),
 
-            const SizedBox(height: 26),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  "Recommended For You 😍",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 0.7,
-                  ),
-                ),
-                Text(
-                  "See All",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).primaryColor,
-                    letterSpacing: 0.7,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 26),
+            SizedBox(height: medium),
+            LabelSection(text: "Recommended For You 😍", style: heading1),
 
+            SizedBox(height: medium),
             TabBar(
               controller: _tabController,
               indicator: BoxDecoration(
-                color: kColorPrimary,
+                color: accent,
                 borderRadius: BorderRadius.circular(30),
               ),
-              labelColor: Colors.white,
-              unselectedLabelColor: kColorPrimary,
+              labelColor: white,
+              unselectedLabelColor: accent,
               isScrollable: true,
               splashBorderRadius: BorderRadius.circular(30),
               tabs: menus
@@ -296,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         borderRadius: BorderRadius.circular(30),
                         border: Border.all(
                           width: 1,
-                          color: kColorPrimary,
+                          color: accent,
                         ),
                       ),
                       child: Tab(
@@ -312,7 +100,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   )
                   .toList(),
             ),
-            // const SizedBox(height: 26),
+
+            SizedBox(height: medium),
             AutoScaleTabBarView(
               controller: _tabController,
               children: const [
@@ -326,6 +115,25 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 ProductCard(isCardHorizontal: true, length: 2),
               ],
             ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: SizedBox(
+        height: 90,
+        child: BottomNavigationBar(
+          backgroundColor: white,
+          selectedItemColor: accent,
+          unselectedItemColor: icon,
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
+          selectedLabelStyle: heading4,
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.trip_origin), label: "Order"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.message_rounded), label: "Order"),
+            BottomNavigationBarItem(icon: Icon(Icons.wallet), label: "Order"),
           ],
         ),
       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/theme.dart';
+import '../utils/styles.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
@@ -28,10 +28,10 @@ class ProductCard extends StatelessWidget {
             ))
         : Container(
             margin: const EdgeInsets.only(bottom: 26),
-            padding: const EdgeInsets.all(15),
+            // padding: const EdgeInsets.all(15),
             child: Column(
               children: List.generate(
-                3,
+                length,
                 (index) => Container(
                   margin: const EdgeInsets.only(bottom: 10),
                   child: const CardItem(isCardHorizontal: true),

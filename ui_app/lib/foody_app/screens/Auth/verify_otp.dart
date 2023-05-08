@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-import '../../utils/theme.dart';
+import '../../utils/styles.dart';
 import '../../widgets/alertdialog_custom.dart';
 import '../../widgets/button.dart';
 
